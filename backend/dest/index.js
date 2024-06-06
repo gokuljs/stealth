@@ -1,10 +1,9 @@
-// src/index.ts
-import express from "express";
+'use strict';
+import express from 'express';
+import home from './Routes/HomeRouter';
 const app = express();
+app.use(home);
 const port = 4000;
-app.get("/", (req, res) => {
-    res.send("Hello, TypeScript with Express!");
-});
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });
