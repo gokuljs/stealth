@@ -1,6 +1,7 @@
 import Quill from 'quill';
 import 'quill/dist/quill.core.css';
 import React, { useEffect, useRef } from 'react';
+import './styles.css';
 
 function TextEditor(): JSX.Element {
   const quillRef = useRef<HTMLDivElement>(null);
@@ -21,7 +22,7 @@ function TextEditor(): JSX.Element {
     };
   }, []);
   return (
-    <div className="max-h-full w-full flex flex-col" ref={quillRef}>
+    <div className="max-h-full w-full flex flex-col " ref={quillRef}>
       Text Editor
     </div>
   );
