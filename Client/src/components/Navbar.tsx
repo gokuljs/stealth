@@ -1,9 +1,9 @@
 const Navbar = (): JSX.Element => {
   return (
-    <div className="w-full h-[60px] flex justify-between items-center px-5 shadow">
+    <nav className="w-full h-[60px] flex justify-between items-center px-5 shadow">
+      <div></div>
       <div>Navbar</div>
-      <div>Navbar</div>
-    </div>
+    </nav>
   );
 };
 
