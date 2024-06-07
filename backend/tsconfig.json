@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "esnext",
+    "moduleResolution": "Node",
     "module": "ESNext", // Use ESNext to enable import/export syntax
     "strict": true,
     "esModuleInterop": true,

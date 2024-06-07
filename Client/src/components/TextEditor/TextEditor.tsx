@@ -1,27 +1,44 @@
-import Quill from 'quill';
 import 'quill/dist/quill.core.css';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import './styles.css';
+import { Socket, io } from 'socket.io-client';
 
 function TextEditor(): JSX.Element {
-  const quillRef = useRef<HTMLDivElement>(null);
+  const [value, setValue] = useState('');
+  const [socket, setSocket] = useState<Socket | null>(null);
+  const quillRef = useRef<ReactQuill | null>(null);
+
   useEffect(() => {
-    if (quillRef.current) {
-      quillRef.current.innerHTML = '';
-      const editor = document.createElement('div');
-      quillRef.current.append(editor);
-      new Quill(editor, {
-        placeholder: 'Compose an epic...',
-        theme: 'snow',
-      });
-    }
+    const s = io('http://localhost:4000');
+    setSocket(s);
     return () => {
-      if (quillRef.current) {
-        quillRef.current.innerHTML = '';
-      }
+      s.disconnect();
     };
   }, []);
-  return <div className="max-h-full w-full flex flex-col text-primary" ref={quillRef} />;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
+  const handleEditorChange = (content, delta, source, editor): void => {
+    if (source !== 'user' || socket === null) return;
+    setValue(content);
+    socket.emit('send-changes', delta);
+  };
+
+  useEffect(() => {
+    if (socket === null || !quillRef.current) return;
+    const quill = quillRef.current.getEditor();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const handler = (delta: any): void => {
+      quill.updateContents(delta);
+    };
+    socket.on('receive-changes', handler);
+    return () => {
+      socket.off('receive-changes', handler);
+    };
+  }, [socket]);
+
+  return <ReactQuill ref={quillRef} theme="snow" value={value} onChange={handleEditorChange} />;
 }
 
 export default React.memo(TextEditor);
