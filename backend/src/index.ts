@@ -17,8 +17,15 @@ app.use(home);
 const port = 4000;
 
 io.on('connection', (socket) => {
-  socket.on('send-changes', (delta) => {
-    socket.broadcast.emit('receive-changes', delta);
+  console.log('socket connected');
+  socket.on('get-document', (id) => {
+    console.log(id);
+    const data = '';
+    socket.join(id);
+    socket.emit('load-document', data);
+    socket.on('send-changes', (delta) => {
+      socket.broadcast.to(id).emit('receive-changes', delta);
+    });
   });
 });
 

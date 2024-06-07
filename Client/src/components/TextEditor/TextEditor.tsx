@@ -5,10 +5,15 @@ import 'react-quill/dist/quill.snow.css';
 import './styles.css';
 import { Socket, io } from 'socket.io-client';
 
-function TextEditor(): JSX.Element {
+interface TextEditorProps {
+  id: string;
+}
+
+const TextEditor: React.FC<TextEditorProps> = ({ id }): JSX.Element => {
   const [value, setValue] = useState('');
   const [socket, setSocket] = useState<Socket | null>(null);
   const quillRef = useRef<ReactQuill | null>(null);
+  const [loading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const s = io('http://localhost:4000');
@@ -38,7 +43,26 @@ function TextEditor(): JSX.Element {
     };
   }, [socket]);
 
-  return <ReactQuill ref={quillRef} theme="snow" value={value} onChange={handleEditorChange} placeholder="Enter your text here" />;
-}
+  useEffect(() => {
+    if (socket === null || !quillRef.current) return;
+    const quill = quillRef.current.getEditor();
+    socket.emit('get-document', id);
+    socket.once('load-document', (data) => {
+      console.log({ data });
+      quill.setContents(data);
+      setIsLoading(false);
+    });
+  }, [id, socket]);
+  return (
+    <ReactQuill
+      readOnly={loading}
+      ref={quillRef}
+      theme="snow"
+      value={loading ? 'Loading....' : value}
+      onChange={handleEditorChange}
+      placeholder="Enter Your Text here"
+    />
+  );
+};
 
 export default React.memo(TextEditor);

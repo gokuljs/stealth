@@ -1,4 +1,4 @@
-import { Route, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import TextEditor from './components/TextEditor/TextEditor';
@@ -28,7 +28,7 @@ function App(): JSX.Element {
       <Sidebar />
       <div className="flex flex-col border flex-1">
         <Navbar />
-        {docId && <TextEditor />}
+        {docId && <TextEditor id={docId} />}
       </div>
     </div>
   );
