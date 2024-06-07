@@ -38,7 +38,7 @@ function TextEditor(): JSX.Element {
     };
   }, [socket]);
 
-  return <ReactQuill ref={quillRef} theme="snow" value={value} onChange={handleEditorChange} />;
+  return <ReactQuill ref={quillRef} theme="snow" value={value} onChange={handleEditorChange} placeholder="Enter your text here" />;
 }
 
 export default React.memo(TextEditor);
