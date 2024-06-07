@@ -21,11 +21,7 @@ function TextEditor(): JSX.Element {
       }
     };
   }, []);
-  return (
-    <div className="max-h-full w-full flex flex-col " ref={quillRef}>
-      Text Editor
-    </div>
-  );
+  return <div className="max-h-full w-full flex flex-col text-primary" ref={quillRef} />;
 }
 
 export default React.memo(TextEditor);
