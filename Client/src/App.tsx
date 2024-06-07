@@ -1,36 +1,24 @@
-import { Route, useNavigate, useParams } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Sidebar from './components/Sidebar';
-import TextEditor from './components/TextEditor/TextEditor';
-import { useEffect, useState } from 'react';
-
+import { Route, Routes } from 'react-router-dom';
+import Login from './pages/Login';
+import Home from './pages/Home';
 function App(): JSX.Element {
-  const navigate = useNavigate();
   const isLoggedIn = true;
-  const [isLoading, setIsLoading] = useState(true);
-  const { docId } = useParams();
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate('/login');
-    } else {
-      setIsLoading(false); // Set loading to false only if logged in
-    }
-  }, [isLoggedIn]);
-
-  console.log(docId);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
+  if (!isLoggedIn) {
+    return (
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="*" element={<Login />} />
+      </Routes>
+    );
   }
+
   return (
-    <div className="h-screen w-screen flex">
-      <Sidebar />
-      <div className="flex flex-col border flex-1">
-        <Navbar />
-        {docId && <TextEditor />}
-      </div>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/:docId" element={<Home />} />
+      <Route path="*" element={<Home />} />
+    </Routes>
   );
 }
 
