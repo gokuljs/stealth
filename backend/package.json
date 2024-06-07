@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node dest/index.js",
     "watch": "tsc --watch",
-    "dev": "node dest/index.js",
+    "dev": "nodemon dest/index.js",
     "lint": "eslint . --ext .ts,.js",
     "format": "prettier --write \"src/**/*.{js,ts,json,css,md}\""
   },
@@ -18,6 +18,7 @@
   "dependencies": {
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "nodemon": "^3.1.3",
     "socket.io": "^4.7.5"
   },
   "devDependencies": {

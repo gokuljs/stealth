@@ -9,6 +9,16 @@
 .ql-editor {
   border: none;
 }
+.ql-container {
+  height: calc(100% - 80px) !important;
+  overflow-y: auto;
+}
+
+.quill {
+  border: none;
+  height: calc(100vh - 60px);
+  flex: 1;
+}
 .ql-snow {
   border: none !important;
 }
