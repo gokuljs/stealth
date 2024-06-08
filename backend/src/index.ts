@@ -25,7 +25,6 @@ app.use(home);
 app.use(cors(corsOptions));
 
 app.post('/create-document', (req, res) => {
-  console.log('title');
   const { title } = req.body; // Extract title from the request body
   if (!title) {
     return res.status(400).send({ message: 'Title is required' });
@@ -38,8 +37,15 @@ app.post('/create-document', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-  socket.on('send-changes', (delta) => {
-    socket.broadcast.emit('receive-changes', delta);
+  console.log('socket is connected');
+  socket.on('get-document', (docId) => {
+    const data = '';
+    socket.join(docId);
+    socket.emit('load-document', data);
+    socket.on('send-changes', (delta) => {
+      console.log(delta);
+      socket.broadcast.to(docId).emit('receive-changes', delta);
+    });
   });
 });
 

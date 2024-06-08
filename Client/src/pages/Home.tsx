@@ -17,7 +17,7 @@ function Home(): JSX.Element {
         <div className="flex flex-col border flex-1">
           <Navbar />
           {docId ? (
-            <TextEditor />
+            <TextEditor docId={docId} key={docId} />
           ) : (
             <div className="flex items-center justify-center flex-col h-full w-full gap-4">
               <div className="border rounded-full p-5 bg-gray-100">
