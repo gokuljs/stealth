@@ -21,7 +21,7 @@ const Sidebar = (): JSX.Element => {
   }, [docId, data, allDocuments]);
   return (
     <aside className="min-w-[250px] bg-secondary flex flex-col shadow border-r-1 border-stone-100 max-h-full overflow-y-auto gap-y-1">
-      <div className="flex justify-center items-center  h-[62px] border-b-2  px-2">
+      <div className="flex justify-center items-center  h-[60px] border-b  px-2">
         <Button role="button" className="flex items-center flex-1" onClick={onOpen}>
           <CirclePlus className="h-[18px] mr-1 text-muted-foreground" />
           Create
@@ -33,6 +33,7 @@ const Sidebar = (): JSX.Element => {
           allDocuments.length > 0 &&
           allDocuments.map((item) => (
             <div
+              title={item.title}
               key={item.id}
               onClick={() => {
                 update(item);
