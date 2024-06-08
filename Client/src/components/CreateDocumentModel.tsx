@@ -20,7 +20,8 @@ const CreateDocumentModel = (): JSX.Element => {
       }
       const data = await createDocument(value);
       navigate(`/${data.id}`);
-      console.log({ data });
+      onClose();
+      setValue('');
     } catch (error) {
       console.log(error);
     }
