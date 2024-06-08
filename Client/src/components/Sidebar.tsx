@@ -3,13 +3,22 @@ import { CirclePlus } from 'lucide-react';
 import { Button } from './ui/button';
 import useGetAllDocument from '@/queries/useGetAllDocument';
 import { useCurrentActiveDocument } from '@/store /useCurrentActiveDocument';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const Sidebar = (): JSX.Element => {
+  const { docId } = useParams();
   const { onOpen } = useCreateDocumentModalStore();
   const { data: allDocuments, isLoading } = useGetAllDocument();
   const { data, update } = useCurrentActiveDocument();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (data === null) {
+      const currentData = allDocuments?.find((item) => item.id === docId);
+      currentData && update(currentData);
+    }
+  }, [docId, data, allDocuments]);
   return (
     <aside className="min-w-[250px] bg-secondary flex flex-col shadow border-r-1 border-stone-100 max-h-full overflow-y-auto gap-y-1">
       <div className="flex justify-center items-center  h-[62px] border-b-2  px-2">

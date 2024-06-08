@@ -38,6 +38,7 @@ io.on('connection', (socket) => {
             socket.on('save-document', async (data) => {
                 const collection = await dbConnectCheck('stealth', 'documents');
                 const timestamp = new Date();
+                console.log({ docId });
                 await collection.findOneAndUpdate({ _id: new ObjectId(docId) }, { $set: { data: data, lastUpdatedAt: timestamp } });
             });
         }
