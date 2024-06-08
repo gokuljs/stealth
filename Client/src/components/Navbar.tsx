@@ -1,7 +1,10 @@
+import { useCurrentActiveDocument } from '@/store /useCurrentActiveDocument';
+
 const Navbar = (): JSX.Element => {
+  const { data } = useCurrentActiveDocument();
   return (
     <nav className="w-full h-[60px] flex justify-between items-center px-5 shadow">
-      <div></div>
+      <div className="capitalize subpixel-antialiased text-2xl">{data?.title}</div>
       <div>Navbar</div>
     </nav>
   );
