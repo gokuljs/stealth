@@ -6,6 +6,7 @@ import './styles.css';
 import { Socket, io } from 'socket.io-client';
 import { EmitterSource } from 'quill';
 import { Delta } from 'quill/core';
+import { useParams } from 'react-router-dom';
 
 const URL = 'http://localhost:4000';
 
@@ -30,11 +31,15 @@ interface TextEditorProps {
   docId: string;
 }
 
-const TextEditor: React.FC<TextEditorProps> = ({ docId }) => {
+const TextEditor: React.FC<TextEditorProps> = () => {
+  const { docId } = useParams();
   const [value, setValue] = useState('');
   const [socket, setSocket] = useState<Socket | null>(null);
   const quillRef = useRef<ReactQuill | null>(null);
   const [enable, setEnable] = useState(false);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  if (!docId) return;
 
   // establishing socket connection
   useEffect(() => {
@@ -61,6 +66,7 @@ const TextEditor: React.FC<TextEditorProps> = ({ docId }) => {
     if (!quillRef.current || socket === null) return;
     const quill = quillRef.current.getEditor();
     socket.once('load-document', (document) => {
+      console.log({ document });
       quill.setContents(document);
       setEnable(true);
     });
@@ -75,16 +81,31 @@ const TextEditor: React.FC<TextEditorProps> = ({ docId }) => {
     socket.emit('send-changes', delta);
   };
 
+  useEffect(() => {
+    if (!quillRef.current || socket === null) return;
+
+    const quill = quillRef.current.getEditor();
+
+    const debounceSave = (): void => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+      timeoutRef.current = setTimeout(() => {
+        socket.emit('save-document', quill.getContents());
+      }, 1000); // Adjust the delay (in milliseconds) as needed
+    };
+
+    debounceSave();
+    // Clean up the timeout if the component unmounts or dependencies change
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, [socket, value]);
+
   return (
-    <ReactQuill
-      readOnly={!enable}
-      ref={quillRef}
-      theme="snow"
-      value={value}
-      onChange={handleEditorChange}
-      placeholder="Enter your text here"
-      modules={modules}
-    />
+    <ReactQuill readOnly={!enable} ref={quillRef} theme="snow" onChange={handleEditorChange} placeholder="Enter your text here" modules={modules} />
   );
 };
 
