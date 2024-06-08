@@ -38,6 +38,12 @@ function TextEditor(): JSX.Element {
     };
   }, [socket]);
 
+  useEffect(() => {
+    if (!quillRef.current) return;
+    const quill = quillRef.current.getEditor();
+    console.log(quill.getContents());
+  }, [value]);
+
   return <ReactQuill ref={quillRef} theme="snow" value={value} onChange={handleEditorChange} placeholder="Enter your text here" />;
 }
 
