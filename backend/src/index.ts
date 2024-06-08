@@ -4,7 +4,6 @@ import http from 'http';
 import { Server } from 'socket.io';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-
 import { ObjectId } from 'mongodb';
 import dbConnectCheck from './utils/dbConnect.js';
 import documentRoutes from './Routes/documents.js';
@@ -40,8 +39,8 @@ io.on('connection', (socket) => {
       });
       socket.on('save-document', async (data) => {
         const collection = await dbConnectCheck('stealth', 'documents');
-
-        await collection.findOneAndUpdate({ _id: new ObjectId(docId) }, { $set: { data: data } });
+        const timestamp = new Date();
+        await collection.findOneAndUpdate({ _id: new ObjectId(docId) }, { $set: { data: data, lastUpdatedAt: timestamp } });
       });
     } catch (error) {
       console.error('Error finding document:', error);
