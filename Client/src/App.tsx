@@ -5,6 +5,7 @@ import SignUp from './pages/SignUp';
 import useUserLoggedInDetails from './hooks/useUserLoggedInDetails';
 function App(): JSX.Element {
   const { isLoggedIn } = useUserLoggedInDetails();
+
   if (!isLoggedIn) {
     return (
       <Routes>

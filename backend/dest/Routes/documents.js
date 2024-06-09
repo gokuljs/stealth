@@ -4,7 +4,7 @@ import { ensureAuthenticated } from '../index.js';
 const router = Router();
 router.post('/create-document', async (req, res) => {
     try {
-        const { title } = req.body; // Extract title from the request body
+        const { title, email } = req.body; // Extract title from the request body
         if (!title) {
             return res.status(400).send({ message: 'Title is required' });
         }
@@ -13,6 +13,12 @@ router.post('/create-document', async (req, res) => {
         const defaultData = {
             title: title,
             data: {},
+            collaborators: [
+                {
+                    email,
+                    permission: 'owner',
+                },
+            ],
             lastUpdatedAt: timestamp,
             createdAt: timestamp,
         };
@@ -28,11 +34,21 @@ router.post('/create-document', async (req, res) => {
         res.status(500).send('An error occurred while creating the document');
     }
 });
-router.get('/allDocuments', ensureAuthenticated, async (req, res) => {
+router.get('/allDocuments/:email', ensureAuthenticated, async (req, res) => {
     try {
+        const { email } = req.params;
+        if (!email) {
+            res.status(400).send({ message: 'email not found' });
+        }
         const collection = await dbConnectCheck('stealth', 'documents');
-        const data = await collection.find().sort({ createdAt: -1 }).toArray();
-        if (!data || data.length === 0) {
+        const data = await collection
+            .find({
+            'collaborators.email': email,
+        })
+            .sort({ createdAt: -1 })
+            .toArray();
+        console.log(data);
+        if (!data) {
             res.status(404).send('No documents found');
         }
         else {

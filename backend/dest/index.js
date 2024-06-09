@@ -46,7 +46,6 @@ app.use(documentRoutes);
 // Passport configuration
 passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
     try {
-        console.log('here', email, password);
         const collection = await dbConnectCheck('stealth', 'user');
         const user = await collection.findOne({ email });
         if (!user) {

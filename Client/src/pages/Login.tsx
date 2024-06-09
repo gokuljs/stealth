@@ -94,6 +94,7 @@ function Login(): JSX.Element {
       sessionStorage.setItem(USER_SESSION_KEY, email);
       navigate('/');
     } catch (error) {
+      update(false);
       console.log(error);
     }
   };

@@ -11,10 +11,10 @@ function useUserLoggedInDetails(): returnTypeProps {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const userEmail = sessionStorage.getItem(USER_SESSION_KEY);
   const { isUserLoggedIn } = useIsUserLoggedIn();
-  console.log({ userEmail, isLoggedIn });
   useEffect(() => {
     setIsLoggedIn(!(!isUserLoggedIn && !userEmail));
   }, [userEmail, isUserLoggedIn]);
+
   return {
     userEmail,
     isLoggedIn,
