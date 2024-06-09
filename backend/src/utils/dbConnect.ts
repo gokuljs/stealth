@@ -1,11 +1,16 @@
 import client from '../config/database.js';
+import { Db } from 'mongodb';
 
-async function dbConnectCheck(dbName: string, collectionName: string) {
-  await client.connect();
-  console.log('Connected successfully to server');
-  const database = await client.db(dbName); // Replace with your database name
+let database: undefined | Db;
+
+async function getDbConnection(dbName: string, collectionName: string) {
+  if (!database) {
+    await client.connect();
+    console.log('Connected successfully to database');
+    database = await client.db(dbName); // Replace with your database name
+  }
   const collection = await database.collection(collectionName);
   return collection;
 }
 
-export default dbConnectCheck;
+export default getDbConnection;

@@ -1,10 +1,10 @@
 import { ObjectId } from 'mongodb';
-import dbConnectCheck from './dbConnect.js';
+import getDbConnection from './dbConnect.js';
 export async function findDocById(id) {
     try {
         if (!id)
             return;
-        const collection = await dbConnectCheck('stealth', 'documents');
+        const collection = await getDbConnection('stealth', 'documents');
         const document = await collection.findOne({ _id: new ObjectId(id) });
         if (document)
             return document;

@@ -118,7 +118,7 @@ function SignUp(): JSX.Element {
               setShowPassword(!showPassword);
             }}
           >
-            show
+            {!showPassword ? 'show' : 'hide'}
           </div>
         </div>
         <Button className="flex items-center gap-1" onClick={handleSignIn}>
@@ -133,17 +133,15 @@ function SignUp(): JSX.Element {
           </p>
         </div>
       </div>
-      <div id="password-rules" className="text-white bg-neutral-800 p-2 rounded-lg text-xl">
-        <small>
-          Password must contain:
-          <ul>
-            <li>At least 8 characters</li>
-            <li>At least one uppercase letter (A-Z)</li>
-            <li>At least one lowercase letter (a-z)</li>
-            <li>At least one number (0-9)</li>
-            <li>{`At least one special character (!@#$%^&*(),.?":{}|<>)`}</li>
-          </ul>
-        </small>
+      <div className="mt-6 p-4 bg-zinc-950 rounded-lg text-white min-w-[600px]">
+        <h3 className="text-lg font-semibold mb-2">Password must contain:</h3>
+        <ul className="list-disc list-inside space-y-1">
+          <li>At least 8 characters</li>
+          <li>At least one uppercase letter (A-Z)</li>
+          <li>At least one lowercase letter (a-z)</li>
+          <li>At least one number (0-9)</li>
+          <li>At least one special character (!@#$%^&*(),.?":{}|&lt;&gt;)</li>
+        </ul>
       </div>
     </div>
   );
