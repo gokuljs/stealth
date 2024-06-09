@@ -5,6 +5,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { loginUser } from '@/apis/login';
 import { useIsUserLoggedIn } from '@/store /useUserLoggedIn';
 import { useNavigate } from 'react-router-dom';
+import { USER_SESSION_KEY } from '@/lib/constant';
 
 function Login(): JSX.Element {
   const [email, setEmail] = useState('');
@@ -90,7 +91,7 @@ function Login(): JSX.Element {
       }
       await loginUser(email, password);
       update(true);
-      sessionStorage.setItem('loggedInUser', email);
+      sessionStorage.setItem(USER_SESSION_KEY, email);
       navigate('/');
     } catch (error) {
       console.log(error);

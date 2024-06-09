@@ -9,13 +9,13 @@ export interface Document {
   lastUpdatedAt: string;
   createdAt: string;
 }
-export const createDocument = async (title: string): Promise<Document> => {
-  const { data } = await http.post('/create-document', { title });
+export const createDocument = async (title: string, userEmail: string | null): Promise<Document> => {
+  const { data } = await http.post('/create-document', { title, email: userEmail });
   return transformALlDocuments(data);
 };
 
-export const getAllDocuments = async (): Promise<Document[]> => {
-  const { data } = await http.get('/allDocuments/:email');
+export const getAllDocuments = async (userEmail: string | null): Promise<Document[]> => {
+  const { data } = await http.get(`/allDocuments/${userEmail}`);
   const modifiedData = data.map((item: Record<string, never>) => transformALlDocuments(item));
   return modifiedData;
 };

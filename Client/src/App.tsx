@@ -2,12 +2,10 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
-import { useIsUserLoggedIn } from './store /useUserLoggedIn';
+import useUserLoggedInDetails from './hooks/useUserLoggedInDetails';
 function App(): JSX.Element {
-  const useSessionActive = sessionStorage.getItem('loggedInUser');
-  const { isUserLoggedIn } = useIsUserLoggedIn();
-  console.log({ isUserLoggedIn }, 'user');
-  if (!isUserLoggedIn && !useSessionActive) {
+  const { isLoggedIn } = useUserLoggedInDetails();
+  if (!isLoggedIn) {
     return (
       <Routes>
         <Route path="/login" element={<Login />} />
