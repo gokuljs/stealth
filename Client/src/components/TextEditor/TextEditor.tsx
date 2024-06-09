@@ -66,7 +66,6 @@ const TextEditor: React.FC<TextEditorProps> = () => {
     if (!quillRef.current || socket === null) return;
     const quill = quillRef.current.getEditor();
     socket.once('load-document', (document) => {
-      console.log({ document });
       quill.setContents(document);
       setEnable(true);
     });

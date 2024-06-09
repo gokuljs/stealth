@@ -8,9 +8,10 @@ interface returnTypeProps {
 }
 
 function useUserLoggedInDetails(): returnTypeProps {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
   const userEmail = sessionStorage.getItem(USER_SESSION_KEY);
   const { isUserLoggedIn } = useIsUserLoggedIn();
+  console.log(isUserLoggedIn, userEmail);
   useEffect(() => {
     setIsLoggedIn(!(!isUserLoggedIn && !userEmail));
   }, [userEmail, isUserLoggedIn]);

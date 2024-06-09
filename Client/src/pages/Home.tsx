@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 function Home(): JSX.Element {
   const { docId } = useParams();
   const { onOpen } = useCreateDocumentModalStore();
-  console.log(docId);
+
   return (
     <>
       <div className="h-screen w-screen flex">
