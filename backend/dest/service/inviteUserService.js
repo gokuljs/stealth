@@ -11,7 +11,6 @@ export const inviteUser = async (req, res) => {
         if (!document) {
             return res.status(404).json({ error: 'Document not found' });
         }
-        console.log(document);
         const collaboratorIndex = document.collaborators.findIndex((collaborator) => collaborator.email === email);
         if (collaboratorIndex !== -1) {
             if (document.collaborators[collaboratorIndex].permission === 'owner') {
