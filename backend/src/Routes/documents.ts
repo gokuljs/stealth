@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import dbConnectCheck from '../utils/dbConnect.js';
+import { ensureAuthenticated } from '../index.js';
 
 const router = Router();
 router.post('/create-document', async (req, res) => {
@@ -28,7 +29,7 @@ router.post('/create-document', async (req, res) => {
   }
 });
 
-router.get('/allDocuments', async (req, res) => {
+router.get('/allDocuments', ensureAuthenticated, async (req, res) => {
   try {
     const collection = await dbConnectCheck('stealth', 'documents');
     const data = await collection.find().sort({ createdAt: -1 }).toArray();

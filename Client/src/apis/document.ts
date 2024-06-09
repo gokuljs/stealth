@@ -15,7 +15,7 @@ export const createDocument = async (title: string): Promise<Document> => {
 };
 
 export const getAllDocuments = async (): Promise<Document[]> => {
-  const { data } = await http.get('/allDocuments');
+  const { data } = await http.get('/allDocuments/:email');
   const modifiedData = data.map((item: Record<string, never>) => transformALlDocuments(item));
   return modifiedData;
 };
