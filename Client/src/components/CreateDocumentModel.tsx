@@ -3,11 +3,12 @@ import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useCreateDocumentModalStore } from '@/store /CreateDocumentModalStore';
 import { createDocument } from '@/apis/document';
 import { useQueryClient } from '@tanstack/react-query';
 import { ApiGetAllDocumentsKey } from '@/lib/queryKey';
 import { useCurrentActiveDocument } from '@/store /useCurrentActiveDocument';
+import useUserLoggedInDetails from '@/hooks/useUserLoggedInDetails';
+import { useCreateDocumentModalStore } from '@/store /useCreateDocumentModalStore';
 
 const CreateDocumentModel = (): JSX.Element => {
   const [value, setValue] = useState('');
@@ -16,6 +17,7 @@ const CreateDocumentModel = (): JSX.Element => {
   const { open, onClose } = useCreateDocumentModalStore();
   const queryClient = useQueryClient();
   const { update } = useCurrentActiveDocument();
+  const { userEmail } = useUserLoggedInDetails();
 
   const handleSubmit = async (): Promise<void> => {
     try {
@@ -23,7 +25,10 @@ const CreateDocumentModel = (): JSX.Element => {
         inputRef?.current && inputRef.current?.focus();
         return;
       }
-      const data = await createDocument(value);
+      if (!userEmail) {
+        throw new Error('Email not found');
+      }
+      const data = await createDocument(value, userEmail);
       queryClient.invalidateQueries({
         queryKey: [ApiGetAllDocumentsKey],
       });
