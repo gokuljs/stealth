@@ -1,4 +1,3 @@
-// utils/validationUtils.ts
 export function checkPasswordStrength(password: string): boolean {
   const minLength = 8;
   const hasUpperCase = /[A-Z]/.test(password);
