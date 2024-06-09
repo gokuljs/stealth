@@ -3,13 +3,12 @@ import Sidebar from '@/components/Sidebar';
 import TextEditor from '@/components/TextEditor/TextEditor';
 import { Button } from '@/components/ui/button';
 import ModelProvider from '@/providers/ModelProvider';
-import { useCreateDocumentModalStore } from '@/store /CreateDocumentModalStore';
+import { useCreateDocumentModalStore } from '@/store /useCreateDocumentModalStore';
 import { useParams } from 'react-router-dom';
 
 function Home(): JSX.Element {
   const { docId } = useParams();
   const { onOpen } = useCreateDocumentModalStore();
-  console.log(docId);
   return (
     <>
       <div className="h-screen w-screen flex">

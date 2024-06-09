@@ -7,6 +7,9 @@ import { Socket, io } from 'socket.io-client';
 import { EmitterSource } from 'quill';
 import { Delta } from 'quill/core';
 import { useParams } from 'react-router-dom';
+import { useCurrentActiveDocument } from '@/store /useCurrentActiveDocument';
+import useUserLoggedInDetails from '@/hooks/useUserLoggedInDetails';
+import { Permission } from '@/apis/document';
 
 const URL = 'http://localhost:4000';
 
@@ -36,9 +39,10 @@ const TextEditor: React.FC<TextEditorProps> = () => {
   const [value, setValue] = useState('');
   const [socket, setSocket] = useState<Socket | null>(null);
   const quillRef = useRef<ReactQuill | null>(null);
-  const [enable, setEnable] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
+  const { data } = useCurrentActiveDocument();
+  const { userEmail } = useUserLoggedInDetails();
+  const role = data?.collaborators?.find((item) => item.email === userEmail)?.permission;
   if (!docId) return;
 
   // establishing socket connection
@@ -66,9 +70,7 @@ const TextEditor: React.FC<TextEditorProps> = () => {
     if (!quillRef.current || socket === null) return;
     const quill = quillRef.current.getEditor();
     socket.once('load-document', (document) => {
-      console.log({ document });
       quill.setContents(document);
-      setEnable(true);
     });
     socket.emit('get-document', docId);
   }, [socket, docId]);
@@ -105,7 +107,15 @@ const TextEditor: React.FC<TextEditorProps> = () => {
   }, [socket, value]);
 
   return (
-    <ReactQuill readOnly={!enable} ref={quillRef} theme="snow" onChange={handleEditorChange} placeholder="Enter your text here" modules={modules} />
+    <ReactQuill
+      key={docId}
+      readOnly={role === Permission.READONLY}
+      ref={quillRef}
+      theme="snow"
+      onChange={handleEditorChange}
+      placeholder={role === Permission.READONLY ? 'You cannot edit the text as you only have read-only permission.' : 'Enter your text here '}
+      modules={modules}
+    />
   );
 };
 
