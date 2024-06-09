@@ -9,7 +9,6 @@ type CurrentActiveDocumentProps = {
 export const useCurrentActiveDocument = create<CurrentActiveDocumentProps>((set) => ({
   data: null,
   update: (data: Document | null) => {
-    console.log(data, 'ind');
     set({ data });
   },
 }));

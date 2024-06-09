@@ -9,6 +9,8 @@ import { USER_SESSION_KEY } from '@/lib/constant';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button } from './ui/button';
 import { useInviteUserModal } from '@/store /useInviteUserModal';
+import { Permission } from '@/apis/document';
+import { Badge } from '@/components/ui/badge';
 
 const Navbar = (): JSX.Element => {
   const { data } = useCurrentActiveDocument();
@@ -17,6 +19,7 @@ const Navbar = (): JSX.Element => {
   const { update } = useIsUserLoggedIn();
   const navigate = useNavigate();
   const { onOpen } = useInviteUserModal();
+  const role = data?.collaborators?.find((item) => item.email === userEmail)?.permission;
   const handleLogout = async (): Promise<void> => {
     try {
       await logout();
@@ -28,11 +31,15 @@ const Navbar = (): JSX.Element => {
       console.log(error);
     }
   };
+
   return (
     <nav className="w-full h-[60px] flex justify-between items-center px-5 shadow">
-      <div className="capitalize subpixel-antialiased text-xl text-stone-900">{data?.title}</div>
+      <div className="capitalize subpixel-antialiased text-xl text-stone-900  flex items-center gap-2 max-w-[300px]">
+        {data?.title}
+        {role && <Badge variant="secondary">{role}</Badge>}
+      </div>
       <div className="flex items-center gap-2">
-        {data && docId && (
+        {data && docId && role && role === Permission.OWNER && (
           <Button variant={'ghost'} onClick={onOpen}>
             <Plus className="h-5 w-5" />
             invite

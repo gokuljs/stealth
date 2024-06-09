@@ -9,6 +9,7 @@ import { isValidEmail } from '@/lib/emailValidity';
 import { useToast } from './ui/use-toast';
 import { useParams } from 'react-router-dom';
 import { inviteUser } from '@/apis/inviteUser';
+import { AxiosError } from 'axios';
 
 const InviteUserModal = () => {
   const [email, setEmail] = useState('');
@@ -30,14 +31,14 @@ const InviteUserModal = () => {
       await inviteUser(docId, email, permission);
       toast({
         title: 'Successfully invited user',
-        description: 'user has been Successfully invited',
+        description: 'User has been successfully invited',
       });
       onClose();
     } catch (error) {
       console.log(error);
       toast({
         title: 'Error',
-        description: (error as Error).message,
+        description: (error as AxiosError)?.message,
       });
     }
   };

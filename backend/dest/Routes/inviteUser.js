@@ -5,8 +5,8 @@ import { ObjectId } from 'mongodb';
 const router = Router();
 router.post('/inviteUser', ensureAuthenticated, async (req, res) => {
     try {
-        const { docId, email, permissions } = req.body;
-        if (!docId || !email || !permissions) {
+        const { docId, email, permission } = req.body;
+        if (!docId || !email || !permission) {
             return res.status(404).json({ error: 'Missing required fields' });
         }
         const collection = await dbConnectCheck('stealth', 'documents');
@@ -18,18 +18,18 @@ router.post('/inviteUser', ensureAuthenticated, async (req, res) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const collaboratorIndex = document.collaborators.findIndex((collaborator) => collaborator.email === email);
         if (collaboratorIndex !== -1) {
-            if (document.collaborators[collaboratorIndex].permissions === 'owner') {
-                return res.status(400).json({ message: 'Cannot update permissions for an owner' });
+            if (document.collaborators[collaboratorIndex].permission === 'owner') {
+                return res.status(400).json({ message: 'Cannot update permission for an owner' });
             }
-            if (document.collaborators[collaboratorIndex].permissions === permissions) {
-                return res.status(400).json({ message: 'Already invited with the same permissions' });
+            if (document.collaborators[collaboratorIndex].permission === permission) {
+                return res.status(400).json({ message: 'Already invited with the same permission' });
             }
             else {
-                document.collaborators[collaboratorIndex].permissions = permissions;
+                document.collaborators[collaboratorIndex].permission = permission;
             }
         }
         else {
-            document.collaborators.push({ email, permissions });
+            document.collaborators.push({ email, permission });
         }
         document.lastUpdatedAt = new Date();
         await collection.updateOne({ _id: new ObjectId(docId) }, { $set: { collaborators: document.collaborators, lastUpdatedAt: document.lastUpdatedAt } });
