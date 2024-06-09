@@ -1,12 +1,15 @@
 import { Document } from '@/apis/document';
 import { create } from 'zustand';
 
-type currentActiveDocumentProps = {
+type CurrentActiveDocumentProps = {
   data: Document | null;
-  update: (data: Document) => void;
+  update: (data: Document | null) => void;
 };
 
-export const useCurrentActiveDocument = create<currentActiveDocumentProps>((set) => ({
+export const useCurrentActiveDocument = create<CurrentActiveDocumentProps>((set) => ({
   data: null,
-  update: (data: Document) => set({ data }),
+  update: (data: Document | null) => {
+    console.log(data, 'ind');
+    set({ data });
+  },
 }));

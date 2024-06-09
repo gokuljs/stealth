@@ -1,4 +1,3 @@
-import { useCreateDocumentModalStore } from '@/store /CreateDocumentModalStore';
 import { CirclePlus } from 'lucide-react';
 import { Button } from './ui/button';
 import useGetAllDocument from '@/queries/useGetAllDocument';
@@ -6,6 +5,7 @@ import { useCurrentActiveDocument } from '@/store /useCurrentActiveDocument';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { USER_SESSION_KEY } from '@/lib/constant';
+import { useCreateDocumentModalStore } from '@/store /useCreateDocumentModalStore';
 
 const Sidebar = (): JSX.Element => {
   const { docId } = useParams();

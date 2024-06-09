@@ -13,6 +13,7 @@ import { ObjectId } from 'mongodb';
 import dbConnectCheck from './utils/dbConnect.js';
 import documentRoutes from './Routes/documents.js';
 import registerRoutes from './Routes/register.js';
+import inviteUserRouter from './Routes/inviteUser.js';
 import { run } from './utils/mongoDbCheck.js';
 import { findDocById } from './utils/docFunction.js';
 import passport from 'passport';
@@ -43,6 +44,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(registerRoutes);
 app.use(documentRoutes);
+app.use(inviteUserRouter);
 // Passport configuration
 passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
     try {

@@ -3,7 +3,7 @@ import dbConnectCheck from '../utils/dbConnect.js';
 import { ensureAuthenticated } from '../index.js';
 
 const router = Router();
-router.post('/create-document', async (req, res) => {
+router.post('/create-document', ensureAuthenticated, async (req, res) => {
   try {
     const { title, email } = req.body; // Extract title from the request body
     if (!title) {
@@ -48,7 +48,6 @@ router.get('/allDocuments/:email', ensureAuthenticated, async (req, res) => {
       })
       .sort({ createdAt: -1 })
       .toArray();
-    console.log(data);
     if (!data) {
       res.status(404).send('No documents found');
     } else {

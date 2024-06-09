@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
 import { registerUser } from '@/apis/register';
 import { useNavigate } from 'react-router-dom';
+import { isValidEmail } from '@/lib/emailValidity';
 
 function SignUp(): JSX.Element {
   const [email, setEmail] = useState('');
@@ -60,11 +61,6 @@ function SignUp(): JSX.Element {
     }
 
     return true;
-  }
-
-  function isValidEmail(email: string): boolean {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailPattern.test(email);
   }
 
   const handleSignIn = async (): Promise<void> => {

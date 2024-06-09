@@ -3,12 +3,12 @@ import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useCreateDocumentModalStore } from '@/store /CreateDocumentModalStore';
 import { createDocument } from '@/apis/document';
 import { useQueryClient } from '@tanstack/react-query';
 import { ApiGetAllDocumentsKey } from '@/lib/queryKey';
 import { useCurrentActiveDocument } from '@/store /useCurrentActiveDocument';
 import useUserLoggedInDetails from '@/hooks/useUserLoggedInDetails';
+import { useCreateDocumentModalStore } from '@/store /useCreateDocumentModalStore';
 
 const CreateDocumentModel = (): JSX.Element => {
   const [value, setValue] = useState('');

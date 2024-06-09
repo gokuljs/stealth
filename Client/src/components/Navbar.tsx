@@ -2,24 +2,28 @@ import { useCurrentActiveDocument } from '@/store /useCurrentActiveDocument';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import useUserLoggedInDetails from '@/hooks/useUserLoggedInDetails';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { LogOut } from 'lucide-react';
+import { LogOut, Plus } from 'lucide-react';
 import { logout } from '@/apis/logout';
 import { useIsUserLoggedIn } from '@/store /useUserLoggedIn';
 import { USER_SESSION_KEY } from '@/lib/constant';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Button } from './ui/button';
+import { useInviteUserModal } from '@/store /useInviteUserModal';
 
 const Navbar = (): JSX.Element => {
   const { data } = useCurrentActiveDocument();
+  const { docId } = useParams();
   const { userEmail } = useUserLoggedInDetails();
   const { update } = useIsUserLoggedIn();
   const navigate = useNavigate();
-
+  const { onOpen } = useInviteUserModal();
   const handleLogout = async (): Promise<void> => {
     try {
       await logout();
       sessionStorage.setItem(USER_SESSION_KEY, '');
       update(false);
       navigate('/login');
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -27,7 +31,13 @@ const Navbar = (): JSX.Element => {
   return (
     <nav className="w-full h-[60px] flex justify-between items-center px-5 shadow">
       <div className="capitalize subpixel-antialiased text-xl text-stone-900">{data?.title}</div>
-      <div>
+      <div className="flex items-center gap-2">
+        {data && docId && (
+          <Button variant={'ghost'} onClick={onOpen}>
+            <Plus className="h-5 w-5" />
+            invite
+          </Button>
+        )}
         {userEmail && (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

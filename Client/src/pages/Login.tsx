@@ -6,6 +6,7 @@ import { loginUser } from '@/apis/login';
 import { useIsUserLoggedIn } from '@/store /useUserLoggedIn';
 import { useNavigate } from 'react-router-dom';
 import { USER_SESSION_KEY } from '@/lib/constant';
+import { isValidEmail } from '@/lib/emailValidity';
 
 function Login(): JSX.Element {
   const [email, setEmail] = useState('');
@@ -63,11 +64,6 @@ function Login(): JSX.Element {
     }
 
     return true;
-  }
-
-  function isValidEmail(email: string): boolean {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailPattern.test(email);
   }
 
   const handleSignIn = async (): Promise<void> => {

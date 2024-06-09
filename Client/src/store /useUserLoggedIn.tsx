@@ -1,11 +1,11 @@
 import { create } from 'zustand';
 
-type currentActiveDocumentProps = {
+type IsUserLoggedInProps = {
   isUserLoggedIn: boolean;
   update: (value: boolean) => void;
 };
 
-export const useIsUserLoggedIn = create<currentActiveDocumentProps>((set) => ({
+export const useIsUserLoggedIn = create<IsUserLoggedInProps>((set) => ({
   isUserLoggedIn: false,
   update: (value: boolean) => set({ isUserLoggedIn: value }),
 }));
