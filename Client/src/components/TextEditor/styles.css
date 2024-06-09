@@ -1,0 +1,31 @@
+.ql-toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none !important;
+  min-height: 80px;
+  max-height: 120px;
+  flex-wrap: nowrap;
+}
+
+.ql-editor {
+  border: none;
+}
+.ql-container {
+  min-height: calc(100% - 80px) !important;
+  max-height: calc(100% - 120px) !important;
+  overflow-y: auto;
+}
+
+.ql-tooltip {
+  left: 15.5px !important;
+}
+
+.quill {
+  border: none;
+  height: calc(100vh - 60px);
+  flex: 1;
+}
+.ql-snow {
+  border: none !important;
+}
