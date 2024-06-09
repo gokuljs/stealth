@@ -1,14 +1,14 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Login from './pages/Login';
 import Home from './pages/Home';
 function App(): JSX.Element {
-  const isLoggedIn = true;
+  const isLoggedIn = false;
 
   if (!isLoggedIn) {
     return (
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="*" element={<Login />} />
+        <Route path="*" element={<Navigate to="/login" replace />} />{' '}
       </Routes>
     );
   }
