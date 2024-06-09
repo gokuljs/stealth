@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { ensureAuthenticated } from '../index.js';
 import getDbConnection from '../utils/dbConnect.js';
 import { ObjectId } from 'mongodb';
+import { ensureAuthenticated } from '../utils/authUtils.js';
 const router = Router();
 router.post('/inviteUser', ensureAuthenticated, async (req, res) => {
     try {

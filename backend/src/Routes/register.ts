@@ -1,22 +1,9 @@
 import { Router } from 'express';
 import getDbConnection from '../utils/dbConnect.js';
 import bcrypt from 'bcrypt';
+import { checkPasswordStrength, isValidEmail } from '../utils/validationUtils.js';
 
 const router = Router();
-
-function checkPasswordStrength(password: string) {
-  const minLength = 8;
-  const hasUpperCase = /[A-Z]/.test(password);
-  const hasLowerCase = /[a-z]/.test(password);
-  const hasNumbers = /[0-9]/.test(password);
-  const hasSpecialChars = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-  return password.length >= minLength && hasUpperCase && hasLowerCase && hasNumbers && hasSpecialChars;
-}
-
-function isValidEmail(email: string) {
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailPattern.test(email);
-}
 
 router.post('/register', async (req, res) => {
   try {

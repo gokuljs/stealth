@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import getDbConnection from '../utils/dbConnect.js';
-import { ensureAuthenticated } from '../index.js';
+import { ensureAuthenticated } from '../utils/authUtils.js';
 
 const router = Router();
 router.post('/create-document', ensureAuthenticated, async (req, res) => {
