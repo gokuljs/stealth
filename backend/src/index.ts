@@ -10,7 +10,7 @@ import session from 'express-session';
 import { Server } from 'socket.io';
 import cors from 'cors';
 import { ObjectId } from 'mongodb';
-import dbConnectCheck from './utils/dbConnect.js';
+import getDbConnection from './utils/dbConnect.js';
 import documentRoutes from './Routes/documents.js';
 import registerRoutes from './Routes/register.js';
 import inviteUserRouter from './Routes/inviteUser.js';
@@ -55,7 +55,7 @@ app.use(inviteUserRouter);
 passport.use(
   new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
     try {
-      const collection = await dbConnectCheck('stealth', 'user');
+      const collection = await getDbConnection('stealth', 'user');
       const user = await collection.findOne({ email });
       if (!user) {
         return done(null, false, { message: 'Incorrect email.' });
@@ -80,7 +80,7 @@ passport.serializeUser((user: any, done) => {
 });
 
 passport.deserializeUser(async (email, done) => {
-  const collection = await dbConnectCheck('stealth', 'user');
+  const collection = await getDbConnection('stealth', 'user');
   const user = await collection.findOne({ email });
   done(null, user);
 });
@@ -125,7 +125,7 @@ io.on('connection', (socket) => {
         socket.broadcast.to(docId).emit('receive-changes', delta);
       });
       socket.on('save-document', async (data) => {
-        const collection = await dbConnectCheck('stealth', 'documents');
+        const collection = await getDbConnection('stealth', 'documents');
         const timestamp = new Date();
         console.log({ docId });
         await collection.findOneAndUpdate({ _id: new ObjectId(docId) }, { $set: { data: data, lastUpdatedAt: timestamp } });

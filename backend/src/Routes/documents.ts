@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import dbConnectCheck from '../utils/dbConnect.js';
+import getDbConnection from '../utils/dbConnect.js';
 import { ensureAuthenticated } from '../index.js';
 
 const router = Router();
@@ -9,7 +9,7 @@ router.post('/create-document', ensureAuthenticated, async (req, res) => {
     if (!title) {
       return res.status(400).send({ message: 'Title is required' });
     }
-    const collection = await dbConnectCheck('stealth', 'documents');
+    const collection = await getDbConnection('stealth', 'documents');
     const timestamp = new Date();
     const defaultData = {
       title: title,
@@ -41,7 +41,7 @@ router.get('/allDocuments/:email', ensureAuthenticated, async (req, res) => {
     if (!email) {
       res.status(400).send({ message: 'email not found' });
     }
-    const collection = await dbConnectCheck('stealth', 'documents');
+    const collection = await getDbConnection('stealth', 'documents');
     const data = await collection
       .find({
         'collaborators.email': email,

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { ensureAuthenticated } from '../index.js';
-import dbConnectCheck from '../utils/dbConnect.js';
+import getDbConnection from '../utils/dbConnect.js';
 import { ObjectId } from 'mongodb';
 const router = Router();
 router.post('/inviteUser', ensureAuthenticated, async (req, res) => {
@@ -9,7 +9,7 @@ router.post('/inviteUser', ensureAuthenticated, async (req, res) => {
         if (!docId || !email || !permission) {
             return res.status(404).json({ error: 'Missing required fields' });
         }
-        const collection = await dbConnectCheck('stealth', 'documents');
+        const collection = await getDbConnection('stealth', 'documents');
         const document = await collection.findOne({ _id: new ObjectId(docId) });
         if (!document) {
             return res.status(404).json({ error: 'Document not found' });

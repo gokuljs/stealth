@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import dbConnectCheck from '../utils/dbConnect.js';
+import getDbConnection from '../utils/dbConnect.js';
 import bcrypt from 'bcrypt';
 const router = Router();
 function checkPasswordStrength(password) {
@@ -28,7 +28,7 @@ router.post('/register', async (req, res) => {
             email: email,
             password: hash,
         };
-        const collection = await dbConnectCheck('stealth', 'user');
+        const collection = await getDbConnection('stealth', 'user');
         const existingUser = await collection.findOne({ email });
         if (existingUser) {
             return res.status(409).send('User already registered.');
