@@ -5,7 +5,7 @@
   border: none !important;
   min-height: 80px;
   max-height: 120px;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 }
 
 .ql-editor {

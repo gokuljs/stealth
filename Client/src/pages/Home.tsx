@@ -13,7 +13,7 @@ function Home(): JSX.Element {
     <>
       <div className="h-screen w-screen flex">
         <Sidebar />
-        <div className="flex flex-col border flex-1">
+        <div className="flex flex-col border flex-1 relative overflow-hidden">
           <Navbar />
           {docId ? (
             <TextEditor docId={docId} key={docId} />
