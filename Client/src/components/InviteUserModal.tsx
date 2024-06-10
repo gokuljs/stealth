@@ -40,6 +40,8 @@ const InviteUserModal = () => {
         title: 'Error',
         description: (error as AxiosError)?.message,
       });
+    } finally {
+      setEmail('');
     }
   };
   return (

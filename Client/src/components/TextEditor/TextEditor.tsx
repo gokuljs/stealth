@@ -10,8 +10,9 @@ import { useParams } from 'react-router-dom';
 import { useCurrentActiveDocument } from '@/store /useCurrentActiveDocument';
 import useUserLoggedInDetails from '@/hooks/useUserLoggedInDetails';
 import { Permission } from '@/apis/document';
+import { env } from '@/lib/environment';
 
-const URL = 'http://localhost:4000';
+const URL = env.VITE_API_BASE_URL || 'http://localhost:4000';
 
 const modules = {
   toolbar: [
