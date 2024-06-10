@@ -44,8 +44,8 @@ Make sure you have Node.js version 20.11.1 installed on your system.
    ```bash
       npm run dev
    ```
+ **Note:** Make sure your frontend is running at [http://localhost:5173/](http://localhost:5173/).
 
-Each command is now separated into its own block for clarity.
    ### Starting the backend server
    
    
@@ -61,14 +61,7 @@ Each command is now separated into its own block for clarity.
    ```bash
       npm run dev
    ```
-
+ **Note:** Make sure your backend is running at [http://localhost:4000/](http://localhost:4000/).
 Each command is now separated into its own block for clarity.
 
-3. **Your frontend is running on [localhost:5173](http://localhost:5173/). Create an account, sign in, and use it.**
-
-
-
-
-
-
-
+**Your frontend is running on [localhost:5173](http://localhost:5173/) and backend on [localhost:4000](http://localhost:4000/). Create an account, sign in, and use it.**
