@@ -19,6 +19,7 @@ function SignUp(): JSX.Element {
     const hasLowerCase = /[a-z]/.test(password);
     const hasNumbers = /[0-9]/.test(password);
     const hasSpecialChars = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    console.log('stealth-local-update')
 
     if (password.length < minLength) {
       toast({
