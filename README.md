@@ -29,7 +29,7 @@ The project is divided into two folders: `client` (frontend) and `backend`.
 
 2. **Configure MongoDB**
 
-   - You should have received an email containing the MongoDB URL.
+   - You should have received MongoDB URL through the email i have sent you.
    - Add the MongoDB URL to your environment variables in `.env` file in the `backend` directory with the following content:
 
      ```env
