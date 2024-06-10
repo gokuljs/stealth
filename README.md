@@ -34,7 +34,7 @@ Make sure you have Node.js version 20.11.1 installed on your system.
    ### Starting the frontend server
    
    ```bash
-     cd client
+     cd Client
    ```
 
    ```bash
