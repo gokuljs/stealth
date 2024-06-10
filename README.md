@@ -34,7 +34,7 @@ The project is divided into two folders: `client` (frontend) and `backend`.
    1. Navigate to the `client` directory:
 
       ```bash
-      cd client
+      cd Client
       ```
 
    2. Install dependencies:
