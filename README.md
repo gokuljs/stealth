@@ -10,7 +10,7 @@
 
 
 
-```markdown
+
 ## Installation 
 
 The Project is divided into two folders: `client` (frontend) and `backend`.
