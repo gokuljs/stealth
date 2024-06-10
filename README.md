@@ -38,28 +38,28 @@ Make sure you have Node.js version 20.11.1 installed on your system.
    ```
 
    ```bash
-   npm install
+      npm install
    ```
 
    ```bash
-   npm run dev
+      npm run dev
    ```
 
 Each command is now separated into its own block for clarity.
    ### Starting the backend server
    
-   Here are the commands separated line by line:
+   
 
    ```bash
-   cd backend
+      cd backend
    ```
 
    ```bash
-   npm install
+      npm install
    ```
 
    ```bash
-   npm run dev
+      npm run dev
    ```
 
 Each command is now separated into its own block for clarity.
