@@ -9,6 +9,8 @@
 <img width="1331" alt="image" src="https://github.com/gokuljs/stealth/assets/51263906/c4e7050f-67db-49cf-ba15-e089b6e8f4bc">
 
 
+
+```markdown
 ## Installation 
 
 The Project is divided into two folders: `client` (frontend) and `backend`.
@@ -21,9 +23,35 @@ Make sure you have Node.js version 20.11.1 installed on your system.
 
 ### Steps
 
-1. Clone this project:
+1. **Clone this project:**
 
    ```bash
    git clone https://github.com/gokuljs/stealth.git
+   ```
+
+2. **Once you have cloned the repo, since you're running it in a development environment, you have to run the frontend and backend servers simultaneously.**
+
+   ### Starting the frontend server
+   
+   ```bash
+   cd client
+   npm install
+   npm run dev
+   ```
+
+   ### Starting the backend server
+   
+   ```bash
+   cd backend
+   npm install 
+   npm run dev 
+   ```
+
+3. **Your frontend is running on [localhost:5173](http://localhost:5173/). Create an account, sign in, and use it.**
+```
+
+
+
+
 
 
