@@ -2,6 +2,7 @@ import passport from 'passport';
 export const login = (req, res, next) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     passport.authenticate('local', (err, user, info) => {
+        console.log({ err });
         if (err)
             return next(err);
         if (!user)
