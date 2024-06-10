@@ -8,7 +8,6 @@ interface AuthInfo {
 export const login = (req: Request, res: Response, next: NextFunction) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   passport.authenticate('local', (err: Error, user: any, info: AuthInfo) => {
-    console.log({ err });
     if (err) return next(err);
     if (!user) return res.status(401).json({ message: 'Authentication failed', info });
     req.logIn(user, (err) => {
