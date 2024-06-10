@@ -10,57 +10,74 @@
 
 
 
+## Installation Instructions
 
-## Installation 
-
-The Project is divided into two folders: `client` (frontend) and `backend`.
-
-The frontend uses React with Vite setup, and the backend uses Node.js, Express, and MongoDB.
+The project is divided into two folders: `client` (frontend) and `backend`.
 
 ### Prerequisites
 
-Make sure you have Node.js version 20.11.1 installed on your system.
+- Node.js version 20.11.1
 
 ### Steps
 
-1. **Clone this project:**
+1. **Clone the project:**
 
    ```bash
    git clone https://github.com/gokuljs/stealth.git
+   cd stealth
    ```
 
-2. **Once you have cloned the repo, since you're running it in a development environment, you have to run the frontend and backend servers simultaneously.**
+2. **Run the frontend and backend servers simultaneously:**
 
-   ### Starting the frontend server
-   
-   ```bash
-     cd Client
-   ```
+   ### Frontend Server Setup
 
-   ```bash
+   1. Navigate to the `client` directory:
+
+      ```bash
+      cd client
+      ```
+
+   2. Install dependencies:
+
+      ```bash
       npm install
-   ```
+      ```
 
-   ```bash
+   3. Start the development server:
+
+      ```bash
       npm run dev
-   ```
- **Note:** Make sure your frontend is running at [http://localhost:5173/](http://localhost:5173/).
+      ```
 
-   ### Starting the backend server
-   
-   
+   **Note:** The frontend should be running at [http://localhost:5173](http://localhost:5173).
 
-   ```bash
+   ### Backend Server Setup
+
+   1. Open a new terminal and navigate to the `backend` directory:
+
+      ```bash
       cd backend
-   ```
+      ```
 
-   ```bash
+   2. Install dependencies:
+
+      ```bash
       npm install
-   ```
+      ```
 
-   ```bash
+   3. Start the development server:
+
+      ```bash
       npm run dev
-   ```
- **Note:** Make sure your backend is running at [http://localhost:4000/](http://localhost:4000/).
+      ```
 
-**Your frontend is running on [localhost:5173](http://localhost:5173/) and backend on [localhost:4000](http://localhost:4000/). Create an account, sign in, and use it.**
+   **Note:** The backend should be running at [http://localhost:4000](http://localhost:4000).
+
+### Important
+
+**Please make sure both the frontend and backend servers are running at the specified URLs for the app to function properly.**
+
+- Frontend: [http://localhost:5173](http://localhost:5173)
+- Backend: [http://localhost:4000](http://localhost:4000)
+
+You can now create an account, sign in, and start using the application.
