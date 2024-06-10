@@ -26,4 +26,19 @@ Make sure you have Node.js version 20.11.1 installed on your system.
    ```bash
    git clone https://github.com/gokuljs/stealth.git
 
+Since we are running this in a development environment, you need to run both the frontend and backend servers simultaneously.
+
+2. Setting up the frontend:
+
+   ```bash
+   cd client
+   npm install
+   npm run dev
+3.# Open another terminal
+# For setting up the backend
+cd backend
+npm install
+npm run dev
+
+
 
