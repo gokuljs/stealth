@@ -27,7 +27,19 @@ The project is divided into two folders: `client` (frontend) and `backend`.
    cd stealth
    ```
 
-2. **Run the frontend and backend servers simultaneously:**
+2. **Configure MongoDB**
+
+   - You should have received an email containing the MongoDB URL.
+   - Add the MongoDB URL to your environment variables in `.env` file in the `backend` directory with the following content:
+
+     ```env
+     MONGODB_URL=your_mongodb_url_here
+     ```
+
+   Replace `your_mongodb_url_here` with the actual MongoDB URL provided in the email.
+
+
+3. **Run the frontend and backend servers simultaneously:**
 
    ### Frontend Server Setup
 
