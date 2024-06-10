@@ -8,3 +8,22 @@
 
 <img width="1331" alt="image" src="https://github.com/gokuljs/stealth/assets/51263906/c4e7050f-67db-49cf-ba15-e089b6e8f4bc">
 
+
+## Installation 
+
+The Project is divided into two folders: `client` (frontend) and `backend`.
+
+The frontend uses React with Vite setup, and the backend uses Node.js, Express, and MongoDB.
+
+### Prerequisites
+
+Make sure you have Node.js version 20.11.1 installed on your system.
+
+### Steps
+
+1. Clone this project:
+
+   ```bash
+   git clone https://github.com/gokuljs/stealth.git
+
+
