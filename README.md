@@ -48,7 +48,7 @@ Make sure you have Node.js version 20.11.1 installed on your system.
    ```
 
 3. **Your frontend is running on [localhost:5173](http://localhost:5173/). Create an account, sign in, and use it.**
-```
+
 
 
 
